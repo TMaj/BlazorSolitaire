@@ -1,0 +1,84 @@
+﻿@page "/solitaire"
+
+<GameContainer Cards="@this.cards" OnCardsChanged="HandleCardsChanged">
+    <div class="decks">
+        <div class="top-decks">
+            <div class="stockpile">
+                <StockpileDeck DeckNumber="0"
+                           TalonPileDeckNumber="1"
+                           PickingCardsValidator="@this.stockpilePickingCardsValidator"
+                           DroppingCardsValidator="@this.stockpileDroppingCardsValidator" />
+                <TalonpileDeck DeckNumber="1"
+                           PickingCardsValidator="@this.talonpilePickingCardsValidator"
+                           DroppingCardsValidator="@this.talonpileDroppingCardsValidator" />
+            </div>
+            <div class="foundations">
+                @foreach (var number in Enumerable.Range(9, 4))
+                {
+                    <FoundationsDeck DeckNumber="@number"
+                               PickingCardsValidator="@this.foundationsPickingCardsValidator"
+                               DroppingCardsValidator="@this.foundationsDroppingCardsValidator" />
+                }
+            </div>
+        </div>
+        <div class="bottom-decks">
+            @foreach (var number in Enumerable.Range(2, 7))
+            {
+                <TableauDeck DeckNumber="@number"
+                           PickingCardsValidator="@this.tableauPickingCardsValidator"
+                           DroppingCardsValidator="@this.tableauDroppingCardsValidator" />
+            }
+        </div>
+    </div>
+</GameContainer>
+
+@code {
+    public const int DecksNumber = 7;
+
+    private int currentCount = 0;
+    private List<CardModel> cards = new List<CardModel>();
+
+    private IPickingCardsValidator tableauPickingCardsValidator;
+    private IDroppingCardsValidator tableauDroppingCardsValidator;
+    private IPickingCardsValidator foundationsPickingCardsValidator;
+    private IDroppingCardsValidator foundationsDroppingCardsValidator;
+    private IPickingCardsValidator stockpilePickingCardsValidator;
+    private IDroppingCardsValidator stockpileDroppingCardsValidator;
+    private IPickingCardsValidator talonpilePickingCardsValidator;
+    private IDroppingCardsValidator talonpileDroppingCardsValidator;
+
+    protected override Task OnParametersSetAsync()
+    {
+        this.cards = DeckBuilder
+            .CreateDeck()
+            .WithColor(Colors.Red)
+            .WithColor(Colors.Black)
+            .Shuffled()
+            .Build()
+            .DistributeCards(DecksNumber);
+
+        this.tableauPickingCardsValidator = new TableauPickingCardsValidator();
+        this.tableauDroppingCardsValidator = new TableauDroppingCardsValidator();
+
+        this.foundationsPickingCardsValidator = new FoundationsPickingCardsValidator();
+        this.foundationsDroppingCardsValidator = new FoundationsDroppingCardsValidator();
+
+        this.stockpilePickingCardsValidator = new StockpilePickingCardsValidator();
+        this.stockpileDroppingCardsValidator = new StockpileDroppingCardsValidator();
+
+        this.talonpilePickingCardsValidator = new TalonpilePickingCardsValidator();
+        this.talonpileDroppingCardsValidator = new TalonpileDroppingCardsValidator();
+
+        return base.OnParametersSetAsync();
+    }
+
+    void HandleCardsChanged(CardsChangedArgs cardsChangedArgs)
+    {
+        Console.WriteLine($"Card changed on deck {cardsChangedArgs.NewDeckNumber}");
+    }
+
+    void IncrementCount()
+    {
+        currentCount++;
+    }
+}

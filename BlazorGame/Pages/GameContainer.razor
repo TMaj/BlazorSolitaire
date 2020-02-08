@@ -1,0 +1,34 @@
+﻿<div class="game-container">
+    <CascadingValue Value="this">
+        @ChildContent
+    </CascadingValue>
+</div>
+ 
+@code {
+    [Parameter] public List<CardModel> Cards { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public EventCallback<CardsChangedArgs> OnCardsChanged { get; set; }
+
+    public List<CardModel> PickedCards { get; set; } = new List<CardModel>();
+
+    public async Task OnCardsChangedAsync(CardsChangedArgs cardsChangedArgs)
+    {
+        Console.WriteLine("CARDS CHANGED");
+
+        if (cardsChangedArgs.CardsDropped)
+        {
+            this.PickedCards
+            .ForEach(c =>
+            {
+                c.DeckNumber = cardsChangedArgs.NewDeckNumber;
+                c.PositionInDeck = cardsChangedArgs.PositionInNewDeck++;
+            });
+        }
+
+        this.PickedCards.Clear();
+
+        Console.WriteLine($"Cards Renumbered to {cardsChangedArgs.NewDeckNumber}");
+
+        await this.OnCardsChanged.InvokeAsync(cardsChangedArgs);
+    }
+}

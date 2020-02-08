@@ -1,0 +1,19 @@
+﻿@inherits DeckBase
+
+    <div class="deck" ondragover="event.preventDefault();" @ondrop="@this.HandleDrop">
+
+        @*@foreach (var card in this.cards)
+        {
+            <Card CardModel="card" Parent="@this" Draggable="@this.PickingCardsValidator.Validate(this.cards, card)" />
+        }*@
+
+        @if (this.cards.Any())
+        {
+            <Card CardModel="@this.cards.OrderBy(c => c.PositionInDeck).Last()" Parent="@this" 
+                  Draggable="@this.PickingCardsValidator.Validate(this.cards, this.cards.OrderBy(c => c.PositionInDeck).Last())" />
+        }
+    </div>
+
+@code {
+
+}

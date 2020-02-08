@@ -1,0 +1,40 @@
+﻿
+.game-container {
+}
+
+.top-decks {
+    display: flex;
+}
+
+.stockpile {
+    display: flex;
+}
+
+.foundations {
+    display: flex;
+}
+
+.bottom-decks {
+    display: flex;
+}
+
+.decks {
+    color: green;
+}
+
+.deck {
+    border: 1px solid gray;
+    border-radius: 15px;
+    margin: 15px;
+    min-width: 9vw;
+    max-width: 10vw;
+}
+
+.card {
+    font-weight: bold;
+    font-family:  Vivaldi;
+}
+
+.card .red {
+    color: red;
+}

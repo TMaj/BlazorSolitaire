@@ -1,0 +1,66 @@
+﻿@inherits DeckBase
+
+<div class="deck" @onclick="OnClick">
+
+    @if (this.cards.Any())
+    {
+        <Card CardModel="@this.cards.First()" Parent="@this" Draggable="false" />
+    }
+
+</div>
+
+@code {
+    [Parameter] public int TalonPileDeckNumber { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        this.cards.Clear();
+
+        if (!this.Container.Cards.Any(c => c.DeckNumber == this.DeckNumber))
+        {
+            return;
+        }
+
+        this.cards.AddRange(Container.Cards
+            .Where(card => card.DeckNumber == this.DeckNumber)
+            .OrderBy(card => card.PositionInDeck)
+            .ToList()
+            .Apply(card => card.Visible = false));
+
+        Console.WriteLine($"Parameters set: Deck {this.DeckNumber}");
+    }
+
+    private async void OnClick()
+    {
+        Console.WriteLine($"Stockpile {this.Container.Cards != null}");
+
+        if (!this.Container.Cards.Any(card => card.DeckNumber == this.DeckNumber))
+        {
+            var position = 0;
+            this.Container.Cards
+                .Where(card => card.DeckNumber == this.TalonPileDeckNumber)
+                .ToList()
+                .Apply(card =>
+                {
+                    card.DeckNumber = this.DeckNumber;
+                    card.PositionInDeck = position++;
+                });
+
+            await this.Container.OnCardsChangedAsync(new CardsChangedArgs(false));
+            return;
+        }
+
+        var lastCard =
+            this.Container.Cards
+            .Where(card => card.DeckNumber == this.DeckNumber)
+            .OrderBy(card => card.PositionInDeck)
+            .Last();
+
+        lastCard.PositionInDeck = this.Container.Cards
+            .Where(card => card.DeckNumber == this.TalonPileDeckNumber)
+            .Count();
+        lastCard.DeckNumber = this.TalonPileDeckNumber;
+
+        await this.Container.OnCardsChangedAsync(new CardsChangedArgs(false));
+    }
+}

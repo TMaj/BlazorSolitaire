@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorGame", "BlazorGame\BlazorGame.csproj", "{51940A4B-E97B-4AA2-AC5C-5C7BEABE9110}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorGame.Tests", "BlazorGame.Tests\BlazorGame.Tests.csproj", "{495957EF-5FD9-4C05-B069-4EEF9EC88881}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51940A4B-E97B-4AA2-AC5C-5C7BEABE9110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51940A4B-E97B-4AA2-AC5C-5C7BEABE9110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51940A4B-E97B-4AA2-AC5C-5C7BEABE9110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51940A4B-E97B-4AA2-AC5C-5C7BEABE9110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{495957EF-5FD9-4C05-B069-4EEF9EC88881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{495957EF-5FD9-4C05-B069-4EEF9EC88881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{495957EF-5FD9-4C05-B069-4EEF9EC88881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{495957EF-5FD9-4C05-B069-4EEF9EC88881}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {46B1B7DA-6C40-4657-AA9C-F3EED56F9E87}
+	EndGlobalSection
+EndGlobal
