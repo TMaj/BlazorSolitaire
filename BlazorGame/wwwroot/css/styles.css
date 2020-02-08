@@ -1,4 +1,9 @@
-﻿
+﻿html, body {
+    margin: 0;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(20,83,22,1) 0%, rgba(17,121,9,1) 35%, rgba(54,189,0,1) 100%);
+}
+
 .game-container {
 }
 
@@ -25,7 +30,7 @@
 }
 
 .deck {
-    border: 1px solid gray;
+    border: 1px solid white;
     border-radius: 15px;
     margin: 15px;
     min-width: 160px;
