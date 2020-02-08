@@ -26,14 +26,10 @@
             .OrderBy(card => card.PositionInDeck)
             .ToList()
             .Apply(card => card.Visible = false));
-
-        Console.WriteLine($"Parameters set: Deck {this.DeckNumber}");
     }
 
     private async void OnClick()
     {
-        Console.WriteLine($"Stockpile {this.Container.Cards != null}");
-
         if (!this.Container.Cards.Any(card => card.DeckNumber == this.DeckNumber))
         {
             var position = 0;

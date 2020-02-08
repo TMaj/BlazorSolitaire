@@ -13,8 +13,6 @@
 
     public async Task OnCardsChangedAsync(CardsChangedArgs cardsChangedArgs)
     {
-        Console.WriteLine("CARDS CHANGED");
-
         if (cardsChangedArgs.CardsDropped)
         {
             this.PickedCards
@@ -26,8 +24,6 @@
         }
 
         this.PickedCards.Clear();
-
-        Console.WriteLine($"Cards Renumbered to {cardsChangedArgs.NewDeckNumber}");
 
         await this.OnCardsChanged.InvokeAsync(cardsChangedArgs);
     }

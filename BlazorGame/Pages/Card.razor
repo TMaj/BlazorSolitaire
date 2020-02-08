@@ -1,23 +1,9 @@
 ﻿
 <div class="@CardClass" draggable="@this.Draggable.ToString()" @ondragstart="@(() => this.Parent.OnDragStart(this.CardModel))"
      ondragover="event.preventDefault();" @ondrop="@(async () => { Console.WriteLine($"Handling from card {this.CardModel.Rank}"); await this.Parent.HandleDrop(); })"
-     @ondrag="@this.OnDrag" @ondblclick="@this.OnDoubleClick">
+     @ondrag="@this.OnDrag">
 
     <img src=@ImageHelper.GetCardImage(this.CardModel.Visible, this.CardModel.Suit, this.CardModel.Rank) class="card-image ">
-    @*@this.CardContent*@
-
-    @*<div class="@this.DivClass">
-        @if (this.CardModel.Visible)
-        {
-            <img src="./img/10C.png" class="card-img">
-            @this.CardContent
-        }
-        else
-        {
-
-            <img class="card-face" alt="Example image" src="svg\card-back.svg" />
-        }
-    </div>*@
 </div>
 
 @code {
@@ -35,10 +21,5 @@
     public void OnDrag(DragEventArgs args)
     {
 
-    }
-
-    public void OnDoubleClick(MouseEventArgs mouseEventArgs)
-    {
-        Console.WriteLine("Double clicked");
     }
 }

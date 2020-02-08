@@ -5,20 +5,18 @@
     @if (this.cards.Any())
     {
         <Card CardModel="@this.cards.OrderBy(c => c.PositionInDeck).Last()" Parent="@this"
-                Draggable="@this.PickingCardsValidator.Validate(this.cards, this.cards.OrderBy(c => c.PositionInDeck).Last())" />
+              Draggable="@this.PickingCardsValidator.Validate(this.cards, this.cards.OrderBy(c => c.PositionInDeck).Last())" />
     }
 </div>
 
 @code {
     public async Task HandleDeckDrop() {
-        Console.WriteLine($"HandleDrop called from derived component no {this.DeckNumber}");
 
         if (this.cards.Any())
         {
             return;
         }
 
-        Console.WriteLine($"Derived component no {this.DeckNumber}: zero cards");
         await base.HandleDrop();
     }
 }
