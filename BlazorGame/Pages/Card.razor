@@ -1,7 +1,6 @@
 ﻿
-<div class="@CardClass" draggable="@this.Draggable.ToString()" @ondragstart="@(() => this.Parent.OnDragStart(this.CardModel))"
-     ondragover="event.preventDefault();" @ondrop="@(async () => { Console.WriteLine($"Handling from card {this.CardModel.Rank}"); await this.Parent.HandleDrop(); })"
-     @ondrag="@this.OnDrag">
+<div class="@CardClass" draggable="@this.Draggable.ToString()" @ondragstart="@(async (DragEventArgs args) => this.Parent.OnDragStart(this.CardModel))"
+     ondragover="event.preventDefault();" @ondrop="@(async (DragEventArgs args) => { await this.Parent.HandleDrop(); })">
 
     <img src=@ImageHelper.GetCardImage(this.CardModel.Visible, this.CardModel.Suit, this.CardModel.Rank) class="card-image ">
 </div>
@@ -17,9 +16,4 @@
     public string CardContent => $"{this.CardModel.Rank} of {this.CardModel.Suit}";
 
     public string DivClass => $"{(this.CardModel.Color == Colors.Black ? "black" : "red")} {(this.CardModel.Visible ? "" : "hidden")}";
-
-    public void OnDrag(DragEventArgs args)
-    {
-
-    }
 }
